@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-y:hidden">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link rel="stylesheet" href="static/x.css">
+  <title>First Flag</title>
+</head>
+
+<body>
+  {% if flag %}
+  <!-- put 3 fireworks that show on top -->
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+  
+  {% endif %}
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">
+        <img src="static/pix_flag_red-512.webp">
+      </a>
+    </div>
+
+    <div class="navbar-menu">
+      <!-- in the center tell the user that they need 100 coins to get a flag without hover -->
+      <div class="navbar-start">
+        <a class="navbar-item">
+          {% if flag %}
+          <span class="icon-text">
+            &nbsp; 
+            <span class="icon">
+              <i class="fas fa-flag"></i>
+            </span>
+            &nbsp; 
+            {{flag}}
+          </span>
+          {% else %}
+          <span class="icon-text">You need
+            &nbsp; 
+            <span class="icon">
+              <i class="fas fa-coins"></i>
+            </span>
+            <span>100</span>
+            &nbsp; to get a flag
+          </span>
+          {% endif %}
+        </a>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+        <div class="navbar-item has-dropdown is-hoverable" style=" padding-left: 5rem;">
+          <div class="navbar-item" href="/login">
+            <div class="buttons">
+              <p class="control">
+                <a class="button is-static">
+                  <span class="icon">
+                    <i class="fas fa-coins"></i>
+                  </span>
+                  &nbsp;&nbsp;{{ coins }}
+                </a>
+              </p>
+              <div class="button is-primary ml-3">
+                {{username}}
+              </div>
+            </div>
+          </div>
+
+          <div class="navbar-dropdown">
+            <div class="navbar-item">
+              <form action="/login", method="POST">
+                <input class="input" type="text" name="username" id="username" style="width: 9rem; margin-right: 1rem;" aria-label="username">
+                <input type="submit" value="Sign in" class="button is-primary" href="/login">
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </nav>
+
+  <!-- Create a small centered container using bulma that has a form that lets the user donate to anyone else -->
+  <div class="container is-centered">
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <div class="box">
+          <form action="/donate" method="POST">
+            <div class="field">
+              <label class="label">Donate to</label>
+              <div class="control">
+                <input class="input" type="text" name="username" id="username" placeholder="Username" required>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Amount</label>
+              <div class="control">
+                <input class="input" type="number" name="amount" id="amount" placeholder="Amount" required>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <input type="submit" value="Donate" class="button is-primary">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- show leaderboard with all users -->
+  <div class="container is-centered">
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <div class="box">
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Coins</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for key, value in users.items() %}
+              <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>
