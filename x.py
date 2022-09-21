@@ -3,6 +3,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from flags import flag1, flag2
+import uvicorn
 
 app = FastAPI()
 
@@ -45,3 +46,6 @@ async def login(request: Request, response: Response, username: str = Form(...),
     response = templates.TemplateResponse("power.html", {"request": request, "response": response, "username": username, "coins": coins[username], "users": coins, "flag": flag})
     response.set_cookie(key="session_token", value=username, httponly=True)
     return response
+
+if __name__ == '__main__':
+    uvicorn.run(app, host="0.0.0.0", port=8000)
