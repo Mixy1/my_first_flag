@@ -23,48 +23,49 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="#">
-        <img src="static/pix_flag_red-512.webp">
+        <img src="static/UM-CTF-team.png">
       </a>
-    </div>
-
-      <!-- in the center tell the user that they need 100 coins to get a flag without hover -->
-      <div class="navbar-start">
-        <a class="navbar-item">
-          {% if flag %}
-          <span class="icon-text">
-            &nbsp; 
-            <span class="icon">
-              <i class="fas fa-flag"></i>
-            </span>
-            &nbsp; 
-            {{flag}}
+      <a class="navbar-item">
+        {% if flag %}
+        <span class="icon-text">
+          &nbsp;
+          <span class="icon">
+            <i class="fas fa-flag"></i>
           </span>
-          {% else %}
-          <span class="icon-text">You need
-            &nbsp; 
+          &nbsp;
+          {{flag}}
+        </span>
+        {% else %}
+        <span class="icon-text">You need
+          &nbsp;
+          <span class="icon">
+            <i class="fas fa-coins"></i>
+          </span>
+          <span>100</span>
+          &nbsp; to get a flag
+        </span>
+        {% endif %}
+      </a>
+      <div class="buttons">
+        <p class="control">
+          <a class="button is-static">
             <span class="icon">
               <i class="fas fa-coins"></i>
             </span>
-            <span>100</span>
-            &nbsp; to get a flag
-          </span>
-          {% endif %}
-        </a>
+            &nbsp;&nbsp;{{ coins }}
+          </a>
+        </p>
       </div>
-      <div class="navbar-end">
-        <div class="navbar-item">
+    </div>
+
+    <!-- in the center tell the user that they need 100 coins to get a flag without hover -->
+    <div class="navbar-end">
+      <div class="navbar-item">
         <div class="navbar-item has-dropdown is-hoverable" style=" padding-left: 5rem;">
           <div class="navbar-item" href="/login">
             <div class="buttons">
-              <p class="control">
-                <a class="button is-static">
-                  <span class="icon">
-                    <i class="fas fa-coins"></i>
-                  </span>
-                  &nbsp;&nbsp;{{ coins }}
-                </a>
-              </p>
-              <div class="button is-primary ml-3">
+
+              <div class="button is-primary ml-3 is-hidden-touch">
                 {{username}}
               </div>
             </div>
@@ -72,15 +73,16 @@
 
           <div class="navbar-dropdown">
             <div class="navbar-item">
-              <form action="/login", method="POST">
-                <input class="input" type="text" name="username" id="username" style="width: 9rem; margin-right: 1rem;" aria-label="username">
+              <form action="/login" , method="POST">
+                <input class="input" type="text" name="username" id="username" style="width: 9rem; margin-right: -3rem;"
+                  aria-label="username">
                 <input type="submit" value="Sign in" class="button is-primary" href="/login">
               </form>
-              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
     </div>
   </nav>
 
@@ -137,8 +139,31 @@
         </div>
       </div>
     </div>
+
+    <div class="container is-centered">
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <div class="box has-text-centered">
+            <!-- include small um ctf team logo next to href-->
+            {% if flag %}
+            <span class="icon-text">
+              &nbsp;
+              <span class="icon">
+                <i class="fas fa-flag"></i>
+              </span>
+              &nbsp;
+              {{flag}}
+            </span>
+            {% endif %}
+            <br>
+            Submit your flag here:<br>
+            <a>https://ctfd.mixynet.io</a>
+          </div>
+        </div>
+      </div>
 </body>
 
 <!-- link static x.py at the bottom -->
 <a href="static/x.py"></a>
+
 </html>
